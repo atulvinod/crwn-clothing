@@ -1,11 +1,8 @@
-import "./App.css";
-import {Categories} from  './components';
+import { Categories } from "./components";
 const App = () => {
-
-
   return (
     <div className="App">
-       <Categories/>
+      <Categories />
     </div>
   );
 };

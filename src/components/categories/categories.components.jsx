@@ -1,5 +1,5 @@
 import "./category.styles.scss";
-import {CategoryItem} from '../category-item';
+import { CategoryItem } from "../category-item";
 
 export const Categories = () => {
   const categories = [
@@ -32,9 +32,9 @@ export const Categories = () => {
 
   return (
     <div className="categories-container">
-      {categories.map((category) => 
-        <CategoryItem category={category}/>
-      )}
+      {categories.map((category) => (
+        <CategoryItem category={category} />
+      ))}
     </div>
   );
 };
