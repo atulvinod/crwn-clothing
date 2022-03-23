@@ -1,3 +1,4 @@
+import { SignUpForm } from "../../components";
 import {
   signIn,
   createUser,
@@ -11,7 +12,8 @@ export const Signin = () => {
 
   return (
     <div>
-      <h1>Signin</h1>
+      <h1>Sign in</h1>
+      <SignUpForm/>
     </div>
   );
 };
