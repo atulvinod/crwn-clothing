@@ -1,9 +1,14 @@
-import { Categories } from "./components";
+import { Routes, Route } from "react-router-dom";
+import * as routes from "./routes";
+
 const App = () => {
   return (
-    <div className="App">
-      <Categories />
-    </div>
+    <Routes>
+      <Route path="/" element={<routes.Navigation />}>
+        <Route index element={<routes.Home />} />
+        <Route path="signin" element={<routes.Signin />} />
+      </Route>
+    </Routes>
   );
 };
 
