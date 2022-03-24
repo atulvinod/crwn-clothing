@@ -1,4 +1,14 @@
 import { useState } from "react";
+import {
+  signUpWithEmailPassword,
+  createUser,
+  Logger,
+  LogLevelEnum,
+} from "../../services";
+import { Button } from "../button/button.component";
+import { FormInput } from "../form-input/form-input.component";
+
+import "./sign-up-form.styles.scss";
 
 const defaultFormFields = {
   displayName: "",
@@ -16,47 +26,71 @@ export const SignUpForm = () => {
     setFormFieldsState({ ...formFields, [name]: value });
   };
 
+  const clearForm = () => {
+    setFormFieldsState(defaultFormFields);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (password != confirmPassword) {
+      alert("Passwords don't match");
+    }
+    try {
+      var result = await signUpWithEmailPassword(email, password);
+      if (result) {
+        var userDocRef = await createUser(result, { displayName });
+        clearForm();
+      }
+    } catch (err) {
+      if (err.code === "auth/email-already-in-use") {
+        alert("Cannot create user, email already in use");
+        Logger(err, LogLevelEnum.ERROR);
+      }
+    }
+  };
+
   return (
-    <div>
-      <h1>Sign up with your email and password</h1>
-      <form onSubmit={() => {}}>
-        <label htmlFor="displayName">Display Name</label>
-        <input
+    <div className="sign-up-container">
+      <h2>Don't have an account?</h2>
+      <span>Sign up with your email and password</span>
+      <form onSubmit={handleSubmit}>
+        <FormInput
+          label={"Display Name"}
           type="text"
-          name="displayName"
+          inputName="displayName"
           required
           onChange={handleChange}
           value={displayName}
         />
 
-        <label htmlFor="email">Email</label>
-        <input
+        <FormInput
+          label={"Email"}
+          inputName="email"
           type="email"
-          name="email"
           required
           onChange={handleChange}
           value={email}
         />
 
-        <label htmlFor="password">Password</label>
-        <input
+        <FormInput
+          label={"Password"}
           type="password"
-          name="password"
+          inputName="password"
           required
           onChange={handleChange}
           value={password}
         />
 
-        <label htmlFor="passwordConfirm">Confirm Password</label>
-        <input
+        <FormInput
+          label={"Confirm Password"}
           type="password"
-          name="passwordConfirm"
+          inputName="confirmPassword"
           required
           onChange={handleChange}
           value={confirmPassword}
         />
 
-        <input type="submit" value="Sign up" />
+        <Button type="submit">Sign Up</Button>
       </form>
     </div>
   );

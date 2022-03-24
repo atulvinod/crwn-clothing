@@ -1,5 +1,13 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect as gSignInRedirect, getRedirectResult as gRedirectResult } from "firebase/auth";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithRedirect as gSignInRedirect,
+  getRedirectResult as gRedirectResult,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword
+} from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCOqurrKCLfnz-gV9ItJfPdhpiu5Wj9XLk",
@@ -19,6 +27,15 @@ provider.setCustomParameters({
 });
 
 export const auth = getAuth();
-export const signIn = () => signInWithPopup(auth, provider);
+export const signInWithGoogle = () => signInWithPopup(auth, provider);
 export const signInWithRedirect = () => gSignInRedirect(auth, provider);
-export const getRedirectResult = () => gRedirectResult(auth)
+export const getRedirectResult = () => gRedirectResult(auth);
+export const signUpWithEmailPassword = (email, password) => {
+  if (!email || !password) return null;
+  return createUserWithEmailAndPassword(auth, email, password);
+};
+
+export const signInWithEmailPassword = (email, password) => {
+  if (!email || !password) return null;
+  return signInWithEmailAndPassword(auth, email, password);
+};
