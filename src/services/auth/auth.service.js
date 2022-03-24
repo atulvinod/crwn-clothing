@@ -6,7 +6,8 @@ import {
   signInWithRedirect as gSignInRedirect,
   getRedirectResult as gRedirectResult,
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -27,9 +28,13 @@ provider.setCustomParameters({
 });
 
 export const auth = getAuth();
+
 export const signInWithGoogle = () => signInWithPopup(auth, provider);
+
 export const signInWithRedirect = () => gSignInRedirect(auth, provider);
+
 export const getRedirectResult = () => gRedirectResult(auth);
+
 export const signUpWithEmailPassword = (email, password) => {
   if (!email || !password) return null;
   return createUserWithEmailAndPassword(auth, email, password);
@@ -39,3 +44,5 @@ export const signInWithEmailPassword = (email, password) => {
   if (!email || !password) return null;
   return signInWithEmailAndPassword(auth, email, password);
 };
+
+export const signOutUser = async () => await signOut(auth);

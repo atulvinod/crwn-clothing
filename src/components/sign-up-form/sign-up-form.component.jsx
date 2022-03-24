@@ -1,13 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   signUpWithEmailPassword,
   createUser,
   Logger,
-  LogLevelEnum,
+  LogLevel,
 } from "../../services";
-import { Button } from "../button/button.component";
-import { FormInput } from "../form-input/form-input.component";
-
+import { Button, FormInput } from "../../components";
+import { UserContext } from "../../contexts";
 import "./sign-up-form.styles.scss";
 
 const defaultFormFields = {
@@ -20,6 +19,7 @@ const defaultFormFields = {
 export const SignUpForm = () => {
   const [formFields, setFormFieldsState] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+  const { setCurrentUser } = useContext(UserContext);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -36,15 +36,17 @@ export const SignUpForm = () => {
       alert("Passwords don't match");
     }
     try {
-      var result = await signUpWithEmailPassword(email, password);
-      if (result) {
-        var userDocRef = await createUser(result, { displayName });
+      var { user } = await signUpWithEmailPassword(email, password);
+
+      if (user) {
+        setCurrentUser(user);
+        var userDocRef = await createUser(user, { displayName });
         clearForm();
       }
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
         alert("Cannot create user, email already in use");
-        Logger(err, LogLevelEnum.ERROR);
+        Logger(err, LogLevel.ERROR);
       }
     }
   };

@@ -1,14 +1,14 @@
-export const LogLevelEnum = {
+export const LogLevel = {
   INFO: 1,
   WARN: 2,
   ERROR: 3,
 };
-export const Logger = (message, logLevel = LogLevelEnum.INFO) => {
+export const Logger = (message, logLevel = LogLevel.INFO) => {
   switch (logLevel) {
-    case LogLevelEnum.WARN:
+    case LogLevel.WARN:
       console.warn(message);
       break;
-    case LogLevelEnum.ERROR:
+    case LogLevel.ERROR:
       console.error(message);
       break;
     default:
