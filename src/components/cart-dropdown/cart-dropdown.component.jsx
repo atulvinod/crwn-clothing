@@ -12,7 +12,7 @@ export const CartDropdown = () => {
           <CartItem key={item.id} cartItem={item}></CartItem>
         ))}
       </div>
-      <Button> Go to checkout</Button>
+      <Button>Go to checkout</Button>
     </div>
   );
 };
