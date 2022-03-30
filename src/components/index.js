@@ -7,3 +7,4 @@ export * from "./button";
 export * from "./shop";
 export * from "./cart-icon";
 export * from "./cart-dropdown";
+export * from "./cart-item";
