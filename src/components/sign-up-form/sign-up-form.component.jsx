@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import {
   signUpWithEmailPassword,
   createUser,
@@ -6,7 +6,6 @@ import {
   LogLevel,
 } from "../../services";
 import { Button, FormInput } from "../../components";
-import { UserContext } from "../../contexts";
 import "./sign-up-form.styles.scss";
 
 const defaultFormFields = {
@@ -19,7 +18,6 @@ const defaultFormFields = {
 export const SignUpForm = () => {
   const [formFields, setFormFieldsState] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
-  const { setCurrentUser } = useContext(UserContext);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -39,7 +37,6 @@ export const SignUpForm = () => {
       var { user } = await signUpWithEmailPassword(email, password);
 
       if (user) {
-        setCurrentUser(user);
         var userDocRef = await createUser(user, { displayName });
         clearForm();
       }

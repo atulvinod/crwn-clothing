@@ -4,3 +4,6 @@ export * from "./sign-up-form";
 export * from "./sign-in-form";
 export * from "./form-input";
 export * from "./button";
+export * from "./shop";
+export * from "./cart-icon";
+export * from "./cart-dropdown";

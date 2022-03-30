@@ -7,6 +7,7 @@ const App = () => {
       <Route path="/" element={<routes.Navigation />}>
         <Route index element={<routes.Home />} />
         <Route path="auth" element={<routes.Auth />} />
+        <Route path="shop" element ={<routes.Shop/>} />
       </Route>
     </Routes>
   );

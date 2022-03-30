@@ -5,15 +5,14 @@ import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 import { useContext } from "react";
 import { UserContext } from "../../contexts";
 import { Logger, LogLevel, signOutUser } from "../../services";
-
+import { CartIcon, CartDropdown } from "../../components";
 export const Navigation = () => {
-  var { currentUser, setCurrentUser } = useContext(UserContext);
+  var { currentUser } = useContext(UserContext);
   Logger(currentUser);
 
   const signOutHandler = async () => {
     try {
       await signOutUser();
-      setCurrentUser(null);
     } catch (err) {
       Logger(err, LogLevel.ERROR);
     }
@@ -38,7 +37,9 @@ export const Navigation = () => {
               Sign-in
             </Link>
           )}
+          <CartIcon />
         </div>
+        <CartDropdown />
       </div>
       <Outlet />
     </Fragment>

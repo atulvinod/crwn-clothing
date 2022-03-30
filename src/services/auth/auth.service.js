@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -27,6 +28,8 @@ provider.setCustomParameters({
   prompt: "select_account",
 });
 
+//The authentication state is persisted between refreshes as firebase listens to the auth state 
+//stored in the remote instance
 export const auth = getAuth();
 
 export const signInWithGoogle = () => signInWithPopup(auth, provider);
@@ -46,3 +49,6 @@ export const signInWithEmailPassword = (email, password) => {
 };
 
 export const signOutUser = async () => await signOut(auth);
+
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);
