@@ -5,9 +5,10 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<routes.Navigation />}>
-        <Route index element={<routes.Home />} />
-        <Route path="auth" element={<routes.Auth />} />
-        <Route path="shop" element ={<routes.Shop/>} />
+        <Route index element={<routes.HomeRoute />} />
+        <Route path="auth" element={<routes.AuthRoute />} />
+        <Route path="shop" element={<routes.Shop />} />
+        <Route path="checkout" element={<routes.CheckoutRoute />} />
       </Route>
     </Routes>
   );

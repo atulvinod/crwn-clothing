@@ -1,5 +1,5 @@
 import { Categories } from "../../components";
 
-export const Home = () => {
+export const HomeRoute = () => {
   return <Categories></Categories>;
 };
