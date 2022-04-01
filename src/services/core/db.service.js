@@ -5,6 +5,8 @@ import {
   doc,
   collection,
   writeBatch,
+  query,
+  getDocs,
 } from "firebase/firestore";
 
 const db = getFirestore();
@@ -36,11 +38,18 @@ export const addCollectionAndDocuments = async (
 
   //we iterate over each object and create an object reference based on the collection
   //that we have passed and add the reference to the batch
-  objectsToAdd.forEach((e)=>{
+  objectsToAdd.forEach((e) => {
     const docRef = doc(collectionRef, e.title.toLowerCase());
     batch.set(docRef, e);
-  })
+  });
 
   //finally we commit the batch and begin the transaction
   await batch.commit();
+};
+
+export const getCollectionAndDocuments = async (collectionKey) => {
+  const collectionRef = collection(db, collectionKey);
+  const q = query(collectionRef);
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs;
 };
