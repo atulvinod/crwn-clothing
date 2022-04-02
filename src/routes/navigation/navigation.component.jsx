@@ -14,7 +14,6 @@ import { CartIcon, CartDropdown } from "../../components";
 export const Navigation = () => {
   var { currentUser } = useContext(UserContext);
   var { isCartOpen } = useContext(CartContext);
-  Logger(currentUser);
 
   const signOutHandler = async () => {
     try {
