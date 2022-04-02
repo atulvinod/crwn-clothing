@@ -1,2 +1,3 @@
 # crwn-clothing
-A clothing store made using react
+A clothing store made using React.
+
