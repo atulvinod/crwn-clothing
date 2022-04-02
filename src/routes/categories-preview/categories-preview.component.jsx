@@ -12,7 +12,7 @@ export const CategoriesPreviewRoute = () => {
           <CategoryPreview
             key={title}
             title={title}
-          products={products}
+            products={products}
           ></CategoryPreview>
         );
       })}

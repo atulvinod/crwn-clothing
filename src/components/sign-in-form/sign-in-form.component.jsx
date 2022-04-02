@@ -7,8 +7,7 @@ import {
   signInWithEmailPassword,
   signInWithGoogle,
 } from "../../services";
-import { Button } from "../button/button.component";
-import { FormInput } from "../form-input/form-input.component";
+import { Button, BUTTON_TYPE_CLASSES, FormInput } from "..";
 
 import "./sign-in-form.styles.scss";
 
@@ -71,7 +70,11 @@ export const SignInForm = () => {
         />
         <div className="buttons-container">
           <Button type="submit">Sign In</Button>
-          <Button type="button" buttonType="google" onClick={siginInWithGoogle}>
+          <Button
+            type="button"
+            buttonType={BUTTON_TYPE_CLASSES.google}
+            onClick={siginInWithGoogle}
+          >
             Google Sign In
           </Button>
         </div>

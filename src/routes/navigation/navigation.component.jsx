@@ -1,6 +1,11 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { Fragment } from "react";
-import "./navigation.styles.scss";
+import {
+  NavigationContainer,
+  LogoContainer,
+  NavLink,
+  NavLinksContainer,
+} from "./navigation.styles.jsx";
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 import { useContext } from "react";
 import { UserContext, CartContext } from "../../contexts";
@@ -21,28 +26,22 @@ export const Navigation = () => {
 
   return (
     <Fragment>
-      <div className="navigation">
-        <Link className="logo-container" to="/">
+      <NavigationContainer>
+        <LogoContainer to="/">
           <CrwnLogo className="logo" />
-        </Link>
-        <div className="nav-links-container">
-          <Link className="nav-link" to="/shop">
-            Shop
-          </Link>
+        </LogoContainer>
+        <NavLinksContainer>
+          <NavLink to="/shop">Shop</NavLink>
           {currentUser ? (
-            <Link className="nav-link" onClick={signOutHandler}>
-              Sign-Out
-            </Link>
+            <NavLink onClick={signOutHandler}>Sign-Out</NavLink>
           ) : (
-            <Link className="nav-link" to="/auth">
-              Sign-in
-            </Link>
+            <NavLink to="/auth">Sign-in</NavLink>
           )}
           <CartIcon />
-        </div>
+        </NavLinksContainer>
         {/* {To show the cart dropdown conditionally, we use the short-circuit operator} */}
         {isCartOpen && <CartDropdown />}
-      </div>
+      </NavigationContainer>
       <Outlet />
     </Fragment>
   );
