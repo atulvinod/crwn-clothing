@@ -13,6 +13,7 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {
+
         // the listener will return the user when authenticated and 
         // null when the user has logger out, hence we can centrailize this logic here
         setCurrentUser(user);
