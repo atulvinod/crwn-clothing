@@ -7,20 +7,16 @@ import { BrowserRouter } from "react-router-dom";
 
 import App from "./App";
 import { store } from "./store";
-import { UserProvider, CategoriesProvider, CartProvider } from "./contexts";
+import { CartProvider } from "./contexts";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        {/* <UserProvider> */}
-          {/* Any child component inside the provider can access the context values */}
-          <CategoriesProvider>
-            <CartProvider>
-              <App />
-            </CartProvider>
-          </CategoriesProvider>
-        {/* </UserProvider> */}
+        {/* Any child component inside the provider can access the context values */}
+        <CartProvider>
+          <App />
+        </CartProvider>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
