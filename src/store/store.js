@@ -1,10 +1,11 @@
 import { compose, createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
+import thunk from 'redux-thunk';
 
 import { rootReducer } from "./root-reducer";
 
 //middlewares are executed before the action hits the reducer
-const middleWares = [logger];
+const middleWares = [logger, thunk];
 
 //We have to apply/compose middlewares, compose is a function which allows us to combine functions
 const composedMiddlewares = compose(applyMiddleware(...middleWares));

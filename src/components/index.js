@@ -1,4 +1,4 @@
-export * from "./categories";
+export * from "./directory";
 export * from "./directory-item";
 export * from "./sign-up-form";
 export * from "./sign-in-form";
@@ -11,3 +11,4 @@ export * from "./cart-item";
 export * from "./checkout-item";
 export * from "./category-preview";
 export * from "./product-card";
+export * from './spinner';
