@@ -9,16 +9,15 @@ import {
 } from "./navigation.styles.jsx";
 
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
-import { useContext } from "react";
-import { CartContext } from "../../contexts";
+
 import { Logger, LogLevel, signOutUser } from "../../services";
 import { CartIcon, CartDropdown } from "../../components";
-import { selectCurrentUser } from "../../store";
+import { selectCurrentUser, isCartOpenSelector } from "../../store";
 
 export const Navigation = () => {
   const currentUser = useSelector(selectCurrentUser);
 
-  var { isCartOpen } = useContext(CartContext);
+  const isCartOpen = useSelector(isCartOpenSelector);
 
   const signOutHandler = async () => {
     try {

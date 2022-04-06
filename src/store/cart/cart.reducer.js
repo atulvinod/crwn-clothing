@@ -1,13 +1,9 @@
-import { createContext, useState } from "react";
+import { CART_ACTION_TYPES } from "./cart.types";
 
-export const CartContext = createContext({
+export const CART_INITIAL_STATE = {
   isCartOpen: false,
-  setIsCartOpen: () => {},
   cartItems: [],
-  addItemsToCart: () => {},
-  removeItemsFromCart: () => {},
-  deleteItemFromCart: () => {},
-});
+};
 
 const addCartItem = (cartItems, productToAdd) => {
   const existingItem = cartItems.find((e, i, a) => e.id === productToAdd.id);
@@ -38,29 +34,35 @@ const deleteCartItem = (cartItems, itemToBeDeleted) => {
   return cartItems.filter((e) => e.id !== itemToBeDeleted.id);
 };
 
-export const CartProvider = ({ children }) => {
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
+export const cartReducer = (state = CART_INITIAL_STATE, payload = {}) => {
+  const { type, action } = payload;
+  const { cartItems } = state;
+  switch (type) {
+    case CART_ACTION_TYPES.ADD_ITEM_TO_CART: {
+      return {
+        ...state,
+        cartItems: addCartItem(cartItems, action),
+      };
+    }
 
-  const addItemsToCart = (productToAdd) => {
-    setCartItems(addCartItem(cartItems, productToAdd));
-  };
+    case CART_ACTION_TYPES.REMOVE_ITEMS_FROM_CART:
+      return {
+        ...state,
+        cartItems: removeCartItem(cartItems, action),
+      };
+    case CART_ACTION_TYPES.DELETE_PRODUCT_FROM_CART:
+      return {
+        ...state,
+        cartItems: deleteCartItem(cartItems, action),
+      };
 
-  const removeItemsFromCart = (productToRemove) => {
-    setCartItems(removeCartItem(cartItems, productToRemove));
-  };
+    case CART_ACTION_TYPES.SET_IS_CART_OPEN:
+      return {
+        ...state,
+        isCartOpen: action,
+      };
 
-  const deleteItemFromCart = (itemToBeDeleted) => {
-    setCartItems(deleteCartItem(cartItems, itemToBeDeleted));
-  };
-
-  const value = {
-    isCartOpen,
-    setIsCartOpen,
-    addItemsToCart,
-    removeItemsFromCart,
-    deleteItemFromCart,
-    cartItems,
-  };
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+    default:
+      return state;
+  }
 };

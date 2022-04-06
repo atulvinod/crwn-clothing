@@ -1,8 +1,15 @@
 import * as Styled from "./cart-icon.styles";
-import { CartContext } from "../../contexts";
-import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { isCartOpenSelector, cartItemsSelector, setCartIsOpen } from "../../store";
 export const CartIcon = () => {
-  const { isCartOpen, setIsCartOpen, cartItems } = useContext(CartContext);
+  const dispatch = useDispatch();
+
+  const setCartOpenState = (state) => {
+    dispatch(setCartIsOpen(state));
+  };
+
+  const isCartOpen = useSelector(isCartOpenSelector);
+  const cartItems = useSelector(cartItemsSelector);
 
   const getCartItemCount = (cartItems) => {
     return cartItems.reduce((acc, item) => {
@@ -11,7 +18,7 @@ export const CartIcon = () => {
   };
 
   return (
-    <Styled.CartIconContainer onClick={() => setIsCartOpen(!isCartOpen)}>
+    <Styled.CartIconContainer onClick={() => setCartOpenState(!isCartOpen)}>
       <Styled.ShoppingIcon />
       <Styled.CartItemCount>{getCartItemCount(cartItems)}</Styled.CartItemCount>
     </Styled.CartIconContainer>
