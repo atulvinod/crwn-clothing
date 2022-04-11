@@ -15,6 +15,9 @@ const App = () => {
 
       dispatch(setCurrentUser(user));
     });
+
+    // when we return a function from the useEffect, it is executed when the
+    // component is unmounted
     return unsubscribe;
   }, [dispatch]);
 

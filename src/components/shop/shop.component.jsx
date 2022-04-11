@@ -3,13 +3,13 @@ import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { CategoriesPreviewRoute, CategoryRoute } from "../../routes";
 import { useDispatch } from "react-redux";
-import { fetchCategoriesAsync } from "../../store";
+import { fetchCategoriesStart } from "../../store";
 
 export const Shop = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchCategoriesAsync());
+    dispatch(fetchCategoriesStart());
   }, []);
 
   return (

@@ -13,18 +13,3 @@ export const fetchCategoriesSuccess = (categoriesMap) =>
 
 export const fetchCategoriesFailed = (error) =>
   createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAILED, error);
-
-/*We will create a thunk action which will get a dispatch function and this handles,
-  all the async logic of our action and will further fire an action which will be handled
-  by our main reducers 
-*/
-export const fetchCategoriesAsync = () => async (dispatch) => {
-  dispatch(fetchCategoriesStart());
-
-  try {
-    const shopCategories = await getShopCategories();
-    dispatch(fetchCategoriesSuccess(shopCategories));
-  } catch (e) {
-    dispatch(fetchCategoriesFailed(e));
-  }
-};
