@@ -11,4 +11,5 @@ export * from "./cart-item";
 export * from "./checkout-item";
 export * from "./category-preview";
 export * from "./product-card";
-export * from './spinner';
+export * from "./spinner";
+export * from "./payment-form";

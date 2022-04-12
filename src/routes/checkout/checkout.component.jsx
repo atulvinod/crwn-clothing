@@ -1,5 +1,5 @@
 import "./checkout.styles.scss";
-import { CheckoutItem } from "../../components";
+import { CheckoutItem, PaymentForm} from "../../components";
 import { useSelector } from "react-redux";
 import { cartItemsSelector } from "../../store";
 
@@ -35,6 +35,7 @@ export const CheckoutRoute = () => {
         return <CheckoutItem item={item} key={item.name}></CheckoutItem>;
       })}
       <span className="total">Total :{calculateTotalItems(cartItems)}</span>
+      <PaymentForm/>
     </div>
   );
 };
