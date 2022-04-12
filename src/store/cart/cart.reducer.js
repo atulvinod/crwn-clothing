@@ -1,23 +1,9 @@
 import { CART_ACTION_TYPES } from "./cart.types";
-import { createContext, useReducer } from "react";
 
 export const CART_INITIAL_STATE = {
   isCartOpen: false,
   cartItems: [],
 };
-
-const INITIAL_STATE = {
-  isCartOpen: false,
-  cartItems: [],
-};
-
-export const CART_ACTION_TYPES = {
-  SET_CART_DROPDOWN_OPEN: "SET_CART_DROPDOWN_OPEN",
-  ADD_CART_ITEM: "ADD_CART_ITEM",
-  REMOVE_CART_ITEM: "REMOVE_CART_ITEM",
-  DELETE_CART_PRODUCT: "DELETE_CART_PRODUCT",
-};
-
 
 const addCartItem = (cartItems, productToAdd) => {
   const existingItem = cartItems.find((e, i, a) => e.id === productToAdd.id);
