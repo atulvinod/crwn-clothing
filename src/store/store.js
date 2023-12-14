@@ -9,7 +9,11 @@ import { rootReducer } from "./root-reducer";
 const sagaMiddleware = createSagaMiddleware();
 
 //middlewares are executed before the action hits the reducer
-const middleWares = [logger, sagaMiddleware];
+const middleWares = [sagaMiddleware];
+
+if (!process.env.NODE_ENV?.includes('prod')) {
+    middleWares.unshift(logger);
+}
 
 //We have to apply/compose middlewares, compose is a function which allows us to combine functions
 const composedMiddlewares = compose(applyMiddleware(...middleWares));

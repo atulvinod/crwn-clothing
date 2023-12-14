@@ -34,6 +34,6 @@ export function* onFetchCategories() {
 // The aggregator function (main saga) for all the generator functions related to this saga
 export function* categoriesSaga() {
     // All is a type of Promise.all in which the further execution waits for the completion of all the generator functions passed as arguments
-    console.log('categories saga')
+  // console.log('categories saga')
     yield all([call(onFetchCategories)])
 }
